@@ -50,7 +50,7 @@ func (m *mockConnection) Write(p []byte) error {
 	}
 	return nil
 }
-func (m *mockConnection) Read([]byte) (int, net.Addr, error) { panic("not implemented") }
+func (m *mockConnection) ReadFrom([]byte) (int, net.Addr, error) { panic("not implemented") }
 
 func (m *mockConnection) SetCurrentRemoteAddr(addr net.Addr) {
 	m.remoteAddr = addr

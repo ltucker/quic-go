@@ -82,7 +82,7 @@ var _ = Describe("Connection", func() {
 		packetConn.dataToRead <- []byte("foo")
 		packetConn.dataReadFrom = &net.UDPAddr{IP: net.IPv4(127, 0, 0, 1), Port: 1336}
 		p := make([]byte, 10)
-		n, raddr, err := c.Read(p)
+		n, raddr, err := c.ReadFrom(p)
 		Expect(err).ToNot(HaveOccurred())
 		Expect(raddr.String()).To(Equal("127.0.0.1:1336"))
 		Expect(n).To(Equal(3))

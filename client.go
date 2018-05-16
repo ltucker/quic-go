@@ -265,16 +265,12 @@ func (c *client) establishSecureConnection() error {
 // Listen listens on the underlying connection and passes packets on for handling.
 // It returns when the connection is closed.
 func (c *client) listen() {
-	var err error
-
 	for {
-		var n int
-		var addr net.Addr
 		data := *getPacketBuffer()
 		data = data[:protocol.MaxReceivePacketSize]
 		// The packet size should not exceed protocol.MaxReceivePacketSize bytes
 		// If it does, we only read a truncated packet, which will then end up undecryptable
-		n, addr, err = c.conn.Read(data)
+		n, addr, err := c.conn.ReadFrom(data)
 		if err != nil {
 			if !strings.HasSuffix(err.Error(), "use of closed network connection") {
 				c.mutex.Lock()

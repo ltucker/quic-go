@@ -7,7 +7,7 @@ import (
 
 type connection interface {
 	Write([]byte) error
-	Read([]byte) (int, net.Addr, error)
+	ReadFrom([]byte) (int, net.Addr, error)
 	Close() error
 	LocalAddr() net.Addr
 	RemoteAddr() net.Addr
@@ -28,7 +28,7 @@ func (c *conn) Write(p []byte) error {
 	return err
 }
 
-func (c *conn) Read(p []byte) (int, net.Addr, error) {
+func (c *conn) ReadFrom(p []byte) (int, net.Addr, error) {
 	return c.pconn.ReadFrom(p)
 }
 
